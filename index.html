@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>City Management Map</title>
+    <script src="js/knockout-3.4.0.js"></script>
+    <script src="js/jQuery.js"></script>
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+<div id="map"></div>
+<div id="view">
+    <div id="filterView">
+        <div data-bind="visible: searchVisible">
+
+            <!-- TODO: Implement live search -->
+            <button data-bind="click: unfilter">Unfilter</button>
+            <p></p>
+
+            <p>Filter by name: </p>
+            <form data-bind="submit:filterByPhrase">
+                <input type="text" data-bind='value:phraseToFilter, valueUpdate: "afterkeydown"'/>
+                <button type="submit" data-bind="enable: phraseToFilter().length > 0">filter</button>
+            </form>
+
+            <p>List by category:</p>
+            <select multiple="multiple"
+                    data-bind="options:allCategories, selectedOptions:categoriesToFilter"> </select>
+
+            <div>
+                <!-- TODO: Implement live search -->
+                <button data-bind="click: filterByCategories, enable: categoriesToFilter().length > 0">filter</button>
+            </div>
+
+        </div>
+
+        <h4 data-bind="click: searchReveal()">Filter</h4>
+    </div>
+
+    <div id="listView">
+        <h4 data-bind="click: listReveal()">List of Places</h4>
+        <ul data-bind="foreach: placeMarkers, visible: listVisible">
+            <li data-bind="visible: $data.visible">
+                <div data-bind="html: $data.titleContent, click: listContentReveal($data)"></div>
+                <div data-bind="html: $data.content, visible: $data.contentVisible"></div>
+                <div data-bind="html: $data.wikiContent, visible: $data.contentVisible">
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<script src="js/app.js"></script>
+<script async type="text/javascript" src="http://maps.googleapis.com/maps/api/js?callback=initMap&key=AIzaSyDUgxh5BcAGS3ncSuKXgZ_-Xi6o0H95RNk"
+        onerror="errorMap()"></script>
+</body>
+</html>
