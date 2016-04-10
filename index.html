@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>City Management Map</title>
+    <title>Louisville Hate Crime Map</title>
     <script src="js/knockout-3.4.0.js"></script>
     <script src="js/jQuery.js"></script>
     <link href="css/style.css" rel="stylesheet">
@@ -18,13 +18,13 @@
             <button data-bind="click: unfilter">Unfilter</button>
             <p></p>
 
-            <p>Filter by name: </p>
+            <p>Filter by case number: </p>
             <form data-bind="submit:filterByPhrase">
                 <input type="text" data-bind='value:phraseToFilter, valueUpdate: "afterkeydown"'/>
                 <button type="submit" data-bind="enable: phraseToFilter().length > 0">filter</button>
             </form>
 
-            <p>List by category:</p>
+            <p>Filter by category:</p>
             <select multiple="multiple"
                     data-bind="options:allCategories, selectedOptions:categoriesToFilter"> </select>
 
@@ -39,7 +39,7 @@
     </div>
 
     <div id="listView">
-        <h4 data-bind="click: listReveal()">List of Places</h4>
+        <h4 data-bind="click: listReveal()">List of Cases</h4>
         <ul data-bind="foreach: placeMarkers, visible: listVisible">
             <li data-bind="visible: $data.visible">
                 <div data-bind="html: $data.titleContent, click: listContentReveal($data)"></div>
@@ -51,7 +51,7 @@
     </div>
 </div>
 <script src="js/app.js"></script>
-<script async type="text/javascript" src="http://maps.googleapis.com/maps/api/js?callback=initMap&key=AIzaSyDUgxh5BcAGS3ncSuKXgZ_-Xi6o0H95RNk"
+<script async type="text/javascript" src="http://maps.googleapis.com/maps/api/js?callback=initMap"
         onerror="errorMap()"></script>
 </body>
 </html>
